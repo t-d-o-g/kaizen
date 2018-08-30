@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretest": "eslint .",
+    "test": "jest",
     "start": "node server.js",
     "watch": "nodemon server.js",
     "sass": "node-sass public/assets/scss/ -o public/assets/css/",
@@ -28,5 +29,12 @@
     "mysql2": "^1.6.1",
     "node-sass": "^4.9.3",
     "sequelize": "^4.38.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.5.0"
   }
 }
