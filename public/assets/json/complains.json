@@ -1,0 +1,51 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                 -74.054130,
+                 40.730816
+            ]
+        },
+        "properties": "William L Dickinson Highschool",        
+        "id": "001",
+        "description": {
+            "name": "William L Dickinson Highschool"
+        }
+    },
+
+    {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                 -74.071468,
+                 40.727955
+            ]
+        },
+        "properties": {
+            "name": "Stanford University"
+        },        
+        "id": "002",
+        "description": "Standford University"
+    },
+
+    {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -74.065782,
+                40.738386
+            ]
+        },
+        "properties": {
+            "name":"Amin's"
+        },        
+        "id": "003",
+        "description":"Amin's"
+    }]
+    
+}
