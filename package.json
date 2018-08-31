@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint .",
     "test": "jest",
+    "test:lint": "eslint . && jest",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
     "start": "node server.js",
     "watch": "nodemon server.js",
     "sass": "node-sass public/assets/scss/ -o public/assets/css/",
