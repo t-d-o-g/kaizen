@@ -1,0 +1,14 @@
+/* Set the size of the div element that contains the map */
+.jumbotron {
+    display: flex;
+    justify-content: center;
+    padding: 0%;
+}
+.img-rounded {
+    height: 100px;  /* The height is 400 pixels */
+    width: 25%;  /* The width is the width of the web page */
+}
+
+.info_content {
+    background-color: darkcyan
+}
