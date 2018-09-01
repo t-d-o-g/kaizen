@@ -6,6 +6,7 @@
 // =============================================================
 const express = require('express');
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
 
 // Sets up the Express App
 // =============================================================
@@ -25,9 +26,12 @@ app.use(bodyParser.json());
 // Static directory
 app.use(express.static('public'));
 
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
 // Routes
 // =============================================================
-// require("./routes/html-routes.js")(app);
+require('./routes/html_routes.js')(app);
 // require("./routes/author-api-routes.js")(app);
 // require("./routes/post-api-routes.js")(app);
 
