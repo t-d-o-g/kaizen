@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "jest",
     "lint:test": "eslint . && jest",
     "start": "node server.js",
-    "watch": "nodemon server.js",
+    "start:watch": "nodemon server.js",
     "sass": "node-sass public/assets/scss/ -o public/assets/css/",
     "sass:watch": "npm run sass && node-sass public/assets/scss/ -wo public/assets/css/"
   },
