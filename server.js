@@ -11,7 +11,7 @@ const exphbs = require('express-handlebars');
 // Sets up the Express App
 // =============================================================
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // Requiring our models for syncing
 const db = require('./models');
@@ -33,9 +33,9 @@ app.set('view engine', 'handlebars');
 // =============================================================
 require('./routes/html-routes.js')(app);
 // require("./routes/author-api-routes.js")(app);
-require('./routes/post-api-routes.js')(app);
+require('./routes/ticket-api-routes.js')(app);
 // VIK_TODO: Find out how to enable it in development mode only
-require('./routes/api-seed.js')(app);
+require('./routes/user-api-routes.js')(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
