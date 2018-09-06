@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Ticket = sequelize.define('Ticket', {
-    category: DataTypes.STRING,
+    ticket: DataTypes.STRING,
   });
   return Ticket;
 };
