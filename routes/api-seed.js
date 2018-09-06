@@ -60,7 +60,7 @@ module.exports = (app) => {
     // let lat = 40.73072195;
     // let lng = -74.0659347096384;
     const location = await db.TicketLocation.create({
-      
+
       location: db.sequelize.fn('ST_GeomFromText', `POINT(${faker.address.latitude()} ${faker.address.longitude()})`),
     });
     const xref = {
