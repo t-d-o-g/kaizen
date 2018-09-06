@@ -36,13 +36,48 @@ module.exports = (app) => {
   });
 
   app.get('/api/seed-ticket', (req, resp) => {
-    db.User.findAll({
-      attributes: ['id'],
-      order: db.sequelize.random(),
-      limit: 1,
-    }).then((data) => {
-      console.log(data);
+    var lat1 = 40.730816;
+    var lon1 = -74.054130;
+    var point1 ='POINT('+lon1 + ' ' + lat1 + ')';
+
+    var lat2 = 40.727955;
+    var lon2 = -74.071468;
+    var point2 ='POINT('+lon2 + ' ' + lat2 + ')';
+
+    var lat3 = 40.738386;
+    var lon3 = -74.065782;
+    var point3 ='POINT('+lon3 + ' ' + lat3 + ')';
+
+    db.Tickets.create({
+
+      category:"Traffic",
+      title:"no green/red light",
+      description:"no red/green light cross the road with so many pedastrians ",
+      location:db.sequelize.fn("ST_GeomFromText", point1),
+      status:"Open",
+      UserId:"1"
+
     });
-    resp.json('Seeded ticket');
+    db.Tickets.create({
+
+      category:"Noise",
+      title:"Noise is too loud",
+      description:"too much choice in this community, need control especially in evenning ",
+      location:db.sequelize.fn("ST_GeomFromText", point2),
+      status:"Open",
+      UserId:"2"
+
+    });   
+    db.Tickets.create({
+
+      category:"Parking",
+      title:"Parking is too expensive",
+      description:"Parking is this train station is ridiculy expensive! ",
+      location:db.sequelize.fn("ST_GeomFromText", point3),
+      status:"Close",
+      UserId:"3"
+
+    });
+    resp.json('3 Seeded ticket');
   });
 };

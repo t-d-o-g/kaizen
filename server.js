@@ -31,6 +31,7 @@ app.set('view engine', 'handlebars');
 
 // Routes
 // =============================================================
+require('./routes/api-seed.js')(app);
 require('./routes/html-routes.js')(app);
 // require("./routes/author-api-routes.js")(app);
 require('./routes/ticket-api-routes.js')(app);

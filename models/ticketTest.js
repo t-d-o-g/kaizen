@@ -1,20 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
     const Tickets = sequelize.define('Tickets', {
-        // category: DataTypes.STRING,
-        // title: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         len: [1]
-        //     }
-        // },
-        // description:{
-        //     type: DataTypes.TEXT,
-        //     allowNull: false,
-        //     len: [1]
-        // },
-        location:DataTypes.GEOMETRY("POINT"),
-        // status: DataTypes.STRING,
+        category: DataTypes.STRING,
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        description:{
+            type: DataTypes.TEXT,
+            allowNull: false,
+            len: [1]
+        },
+        location:DataTypes.GEOMETRY('POINT'),
+        status: DataTypes.STRING,
     });
 
     Tickets.associate = function(models) {

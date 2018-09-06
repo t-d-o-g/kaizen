@@ -42,14 +42,15 @@ module.exports = function(app) {
   // POST route for saving a new ticket
   app.post("/api/tickets", function(req, res) {
     console.log(req.body);
+    var point = {type: 'Point',coordinates: [39.807222,-76.984722]}
     db.Tickets.create({
 
-      // category:req.body.category,
-      // title:req.body.title,
-      // description:req.body.description,
-      location:req.body.location,
-      // status:req.body.status,
-      UserId:1
+      category:"traffic",
+      title:"red light",
+      description:"no red/green light across the road",
+      location:db.sequelize.fn("ST_GeomFromText", 'POINT(12 11)'),
+      status:"open",
+      UserId:"1"
 
     }).then(function(dbTickets) {
       res.json(dbTickets);
