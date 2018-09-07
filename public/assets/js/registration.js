@@ -40,7 +40,8 @@ $(document).ready(() => {
     $.post('/api/user-registration/', User, () => {
       //   window.location.href = "/registration";
       console.log('user added');
-      getMapPage();
+      //getMapPage();
+      window.location = '/';
     });
    
    
@@ -50,8 +51,3 @@ $(document).ready(() => {
   // Update a given post, bring user to the blog page when done
 });
 
-function getMapPage() {
-  $.get('/',() => {
-    console.log('tickets added');
-  });
-}
