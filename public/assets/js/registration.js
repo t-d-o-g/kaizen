@@ -14,7 +14,7 @@ $(document).ready(() => {
 
   // Adding an event listener for when the form is submitted
   $('#registration').on('submit', (event) => {
-   // event.preventDefault();
+   event.preventDefault();
    
     if (!fname.val().trim() || !username.val().trim() || !email.val().trim() || !password.val().trim()) {
       return;
