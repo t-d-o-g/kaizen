@@ -16,8 +16,8 @@ module.exports = function(app) {
   app.get("/api/ticketxrefs", function(req, res) {
       console.log("ok");
     var query = {};
-    if (req.query.UserId) {
-      query.UserId = req.query.UserId;
+    if (req.query.user_id) {
+      query.UserId = req.query.user_id;
     }
     db.TicketXref.findAll({
       where: query,
