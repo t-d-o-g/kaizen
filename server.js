@@ -32,6 +32,7 @@ app.set('view engine', 'handlebars');
 // Routes
 // =============================================================
 require('./routes/index')(app);
+require('./routes/registration')(app);
 require('./routes/tickets')(app);
 require('./routes/post-api-routes.js')(app);
 // VIK_TODO: Find out how to enable it in development mode only

@@ -128,4 +128,3 @@ function handleLocationError(browserHasGeolocation, infowindow, pos) {
 
 // Initialize maps
 google.maps.event.addDomListener(window, 'load', initialize_map);
-console.log('Am i HERE NOW?');
