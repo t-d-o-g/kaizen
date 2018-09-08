@@ -49,45 +49,41 @@ module.exports = (app) => {
   }
 
   async function seedTicket() {
-    const user = await db.User.findOne({
+    const user = db.User.findOne({
       attributes: ['id'],
       order: db.sequelize.random(),
     });
-    const status = await db.Status.findOne({
+    const status = db.Status.findOne({
       attributes: ['id'],
       order: db.sequelize.random(),
     });
-    const category = await db.Category.findOne({
+    const category = db.Category.findOne({
       attributes: ['id'],
       order: db.sequelize.random(),
     });
-    const ticket = await db.Ticket.create({ ticket: faker.lorem.sentence() });
+    const ticket = db.Ticket.create({ ticket: faker.lorem.sentence() });
 
-    // const lat = 40 + (Math.random() * (10**8) / (10**8) + (42 - 40));
     const lat = randomNum(40, 41, 8).toFixed(8);
-    const lng = randomNum(74, 75, 13).toFixed(13);
+    const lng = randomNum(-75, -74, 13).toFixed(13);
 
     // let lat = 40.73072195;
     // let lng = -74.0659347096384;
-    // const lat = faker.random.number({ option: { min: 40, max: 42, precision: 8 } });
-    // const lng = faker.random.number({ option: { min: 70, max: 74, precision: 13 } });
-    console.log('lat', lat, 'lng', lng);
+    console.log('longitute', lng);
 
-    const location = await db.TicketLocation.create({
-
-      location: db.sequelize.fn('ST_GeomFromText', `POINT(
-        ${lat} ${lng})`),
-        // ${faker.address.latitude()} ${faker.address.longitude()})`),
+    const location = db.TicketLocation.create({
+      location: db.sequelize.fn('ST_GeomFromText', `POINT(${lat} ${lng})`),
     });
+
+    const promises = await Promise.all([user, status, category, ticket, location]);
     const xref = {
-      UserId: user.id,
-      StatusId: status.id,
-      CategoryId: category.id,
-      TicketId: ticket.id,
-      TicketLocationId: location.id,
+      UserId: promises[0].id,
+      StatusId: promises[1].id,
+      CategoryId: promises[2].id,
+      TicketId: promises[3].id,
+      TicketLocationId: promises[4].id,
     };
 
-    db.TicketXref.create(xref);
+  db.TicketXref.create(xref);
   }
 
   function seedTheTickets() {
