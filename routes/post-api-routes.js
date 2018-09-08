@@ -21,4 +21,17 @@ module.exports = (app) => {
       resp.json(data);
     });
   });
+
+  app.post('/api/login', (req, resp) => {
+    console.log('Comes in login route');
+    db.User.findOne({
+      attributes: ['id'],
+      where: {
+        username: req.body.username,
+        password: req.body.password,
+      },
+    }).then((data) => {
+      resp.json(data ? 'ok' : 'failed');
+    });
+  });
 };
