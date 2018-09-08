@@ -97,6 +97,11 @@ span.input-group-addon i {
   overflow: hidden !important;
   -webkit-overflow-scrolling: touch; }
 
+ /* #email:invalid {
+  border-color: red;
+  border-width: 5px;
+}  */
+
 #button {
   border: 1px solid #ccc;
   margin-top: 28px;
