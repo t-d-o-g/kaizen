@@ -37,7 +37,7 @@ function initialize_map() {
       console.log("Tickets", data);
       tickets = data;
       if (!tickets || !tickets.length) {
-        alertEmpty();
+        // alertEmpty();
         //console.log("no tickets yet");
       }
       else {

@@ -33,6 +33,10 @@ span.input-group-addon i {
   color: #009edf;
   font-size: 17px; }
 
+a {
+  color: yellow;
+}
+
 .main {
   margin: 50px 15px; }
 
