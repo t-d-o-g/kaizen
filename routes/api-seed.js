@@ -64,10 +64,11 @@ module.exports = (app) => {
     const ticket = db.Ticket.create({ ticket: faker.lorem.sentence() });
 
     const lat = randomNum(40, 41, 8).toFixed(8);
-    const lng = randomNum(74, 75, 13).toFixed(13);
+    const lng = randomNum(-75, -74, 13).toFixed(13);
 
     // let lat = 40.73072195;
     // let lng = -74.0659347096384;
+    console.log('longitute', lng);
 
     const location = db.TicketLocation.create({
       location: db.sequelize.fn('ST_GeomFromText', `POINT(${lat} ${lng})`),
