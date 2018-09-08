@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint .",
     "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:test": "eslint . && jest",
     "start": "node server.js",
-    "watch": "nodemon server.js",
+    "start:watch": "nodemon server.js",
     "sass": "node-sass public/assets/scss/ -o public/assets/css/",
     "sass:watch": "npm run sass && node-sass public/assets/scss/ -wo public/assets/css/"
   },
@@ -28,13 +30,15 @@
     "express-handlebars": "^3.0.0",
     "mysql2": "^1.6.1",
     "node-sass": "^4.9.3",
-    "sequelize": "^4.38.0"
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1"
   },
   "devDependencies": {
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.5.0"
+    "jest": "^23.5.0",
+    "faker": "^4.1.0"
   }
 }
