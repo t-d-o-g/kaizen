@@ -2,32 +2,35 @@ const faker = require('faker');
 const db = require('../models');
 
 module.exports = (app) => {
-  function seedCategory() {
-    db.Category.count().then((c) => {
+  async function seedCategory() {
+    await db.Category.count().then(async (c) => {
       // If we got a positive count then assume that
       // the table is seeded
       if (c == 0) {
         db.Category.create({ category: 'None' });
         db.Category.create({ category: 'Parking' });
         db.Category.create({ category: 'Noise' });
-        db.Category.create({ category: 'Traffic' });
+        await db.Category.create({ category: 'Traffic' });
+        // console.log('c4');
       }
     });
+    // console.log('c5');
   }
 
-  function seedStatus() {
-    db.Status.count().then((c) => {
+  async function seedStatus() {
+    await db.Status.count().then(async (c) => {
       // If we got a positive count then assume that
       // the table is seeded
       if (c == 0) {
         db.Status.create({ status: 'None' });
         db.Status.create({ status: 'Open' });
-        db.Status.create({ status: 'Close' });
+        await db.Status.create({ status: 'Close' });
       }
     });
   }
 
-  function seedUser() {
+  async function seedUser() {
+    const results = [];
     let i = 0;
     for (i = 0; i < 5; ++i) {
       const user = {
@@ -37,9 +40,14 @@ module.exports = (app) => {
         username: faker.internet.userName(),
         password: faker.internet.password(),
       };
-      db.User.create(user);
+      results.push(db.User.create(user));
     }
+    await Promise.all(results);
     return i;
+  }
+
+  function randomNum(min, max, prec) {
+    return ( min + (Math.random() * (10**prec) / (10**prec) + (max - min - 1)) );
   }
 
   async function seedTicket() {
@@ -57,11 +65,22 @@ module.exports = (app) => {
     });
     const ticket = await db.Ticket.create({ ticket: faker.lorem.sentence() });
 
+    // const lat = 40 + (Math.random() * (10**8) / (10**8) + (42 - 40));
+    const lat = randomNum(40, 41, 8).toFixed(8);
+    const lng = randomNum(74, 75, 13).toFixed(13);
+
     // let lat = 40.73072195;
     // let lng = -74.0659347096384;
+    // const lat = faker.random.number({ option: { min: 40, max: 42, precision: 8 } });
+    // const lng = faker.random.number({ option: { min: 70, max: 74, precision: 13 } });
+    console.log('lat', lat, 'lng', lng);
+
     const location = await db.TicketLocation.create({
       
-      location: db.sequelize.fn('ST_GeomFromText', `POINT(${faker.address.latitude()} ${faker.address.longitude()})`),
+
+      location: db.sequelize.fn('ST_GeomFromText', `POINT(
+        ${lat} ${lng})`),
+        // ${faker.address.latitude()} ${faker.address.longitude()})`),
     });
     const xref = {
       UserId: user.id,
@@ -72,11 +91,6 @@ module.exports = (app) => {
     };
 
     db.TicketXref.create(xref);
-    // console.log('user', user.id);
-    // console.log('status', status.id);
-    // console.log('category', category.id);
-    // console.log('ticket', ticket.id);
-    // console.log('location', location.id);
   }
 
   function seedTheTickets() {
