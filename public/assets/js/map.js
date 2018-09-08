@@ -7,31 +7,65 @@ const infowindows = [];
 function initialize_map() {
   map = new google.maps.Map(document.getElementById('map-container'), {
     center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
+    zoom: 10,
   });
 
+  // Try code getting data from server here
+  //------------------------------------------------
+  var tickets;
 
-  // importing data: for testing purpose only, will eventually get data from server
-  //-------------------------------------------------------
-  const script = document.createElement('script');
-  script.src = 'assets/js/complaint_GeoJSONP.js';
-  document.getElementsByTagName('head')[0].appendChild(script);
+  // The code below handles the case where we want to get all tickets for a specific user
+  // Looks for a query param in the url for user_id
+  var url = window.location.search;
+  var userId;
+  if (url.indexOf("?user_id=") !== -1) {
+    userId = url.split("=")[1];
+    getTickets(userId);
+  }
+  // If there's no ticketId we just get all tickets as usual
+  else {
+    getTickets();
+  }
 
-  window.complaintfeed_callback = function (results) {
-    for (var i = 0; i < results.features.length; i++) {
-      const coords = results.features[i].geometry.coordinates;
-      const latLng = new google.maps.LatLng(coords[1], coords[0]);
+  // This function grabs tickets from the database and updates the view
+  function getTickets(user) {
+    userId = user || "";
+    if (userId) {
+      userId = "/?user_id=" + userId;
+    }
+    $.get("/api/ticketxrefs" + userId, function(data) {
+      console.log("Tickets", data);
+      tickets = data;
+      if (!tickets || !tickets.length) {
+        alertEmpty();
+        //console.log("no tickets yet");
+      }
+      else {
+        initializeMarkers();
+        initializeEvents();
+        //console.log(tickets);
+      }
+    });
+  }
+
+  // InitializeRows markers
+  function initializeMarkers() {
+    for (var i = 0; i < tickets.length; i++) {
+      const coords = tickets[i].TicketLocation.location.coordinates;
+      const latLng = new google.maps.LatLng(coords[0], coords[1]);
       const marker = new google.maps.Marker({
         position: latLng,
         map,
-        data: results.features[i],
+        data: tickets[i],
       });
-      inforwindowContent = `${'<div class = "info_content">'
-                                 + '<h3>'}${results.features[i].description.title}</h3>`
-                                 + `<p id = "issue">${results.features[i].description.content}</p>`
-                                 + '<p>' + `status: ${results.features[i].description.status}</p>`
+
+      inforwindowContent = '<div class = "info_content">'
+                                 + '<h3>Category: ' + tickets[i].Category.category +'</h3>'
+                                 + '<b>User</b>: ' + tickets[i].User.username
+                                 + '<p id = "issue">'+ '<b>Description</b>: ' + tickets[i].Ticket.ticket+'</p>'
+                                 + '<p>' + '<b>Status</b>: '+ tickets[i].Status.status+ '</p>'
                                  + '<button type="button" class="btn btn-primary" id = "update">Review</button>';
-      '</div>';
+                                 + '</div>';
       infowindow = new google.maps.InfoWindow({
         content: inforwindowContent,
         maxWidth: 200,
@@ -39,13 +73,15 @@ function initialize_map() {
 
       markers.push(marker);
       infowindows.push(infowindow);
-      info.push(results.features[i].properties.name);
+
     }
-    console.log(markers);
+  }
+
+  function initializeEvents() {
     for (var i = 0; i < markers.length; i++) {
       (function (markers, i) {
         google.maps.event.addListener(markers[i], 'click', function (event) {
-          console.log(this.data.description);
+          console.log(this.data.Ticket.ticket);
           infowindows[i].open(map, markers[i]);
 
           $('#update').on('click', () => {
@@ -55,16 +91,14 @@ function initialize_map() {
         });
       }(markers, i));
     }
-    console.log($('update'));
-    console.log($('<p>'));
-    // $("#update").on("click", function(){
-    //     var content = $("<p>").text();
-    //     console.log(content);
-    // })
-  };
 
+  }
 
-  //-----------------------------------------------------------
+  function alertEmpty() {
+    alert("There is no tickets related yet");
+  }
+
+  //----------------------------------------------------------
 
   // Try HTML 5 GeoLocation
   if (navigator.geolocation) {
@@ -84,7 +118,7 @@ function initialize_map() {
   }
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+function handleLocationError(browserHasGeolocation, infowindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation
     ? 'Error: The Geolocation service failed.'
