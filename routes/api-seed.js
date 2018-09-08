@@ -11,10 +11,8 @@ module.exports = (app) => {
         db.Category.create({ category: 'Parking' });
         db.Category.create({ category: 'Noise' });
         await db.Category.create({ category: 'Traffic' });
-        // console.log('c4');
       }
     });
-    // console.log('c5');
   }
 
   async function seedStatus() {
@@ -76,7 +74,6 @@ module.exports = (app) => {
     console.log('lat', lat, 'lng', lng);
 
     const location = await db.TicketLocation.create({
-      
 
       location: db.sequelize.fn('ST_GeomFromText', `POINT(
         ${lat} ${lng})`),
