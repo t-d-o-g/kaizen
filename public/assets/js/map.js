@@ -58,7 +58,7 @@ function initialize_map() {
         data: tickets[i],
       });
 
-      inforwindowContent = `${'<div class = "info_content">'
+      infowindowContent = `${'<div class = "info_content">'
                                  + '<h3>Category: '}${tickets[i].Category.category}</h3>`
                                  + `<b>User</b>: ${tickets[i].User.username
                                  }<p id = "issue">` + `<b>Description</b>: ${tickets[i].Ticket.ticket}</p>`
@@ -66,7 +66,7 @@ function initialize_map() {
                                  + '<button type="button" class="btn btn-primary" id = "update">Review</button>';
       +'</div>';
       infowindow = new google.maps.InfoWindow({
-        content: inforwindowContent,
+        content: infowindowContent,
         maxWidth: 200,
       });
 
@@ -84,7 +84,7 @@ function initialize_map() {
           infowindows[i].open(map, markers[i]);
 
           $('#update').on('click', () => {
-            window.location.href = `updateTickcet.html?ticketXref_id=${ticketXref_id}`;
+            window.location.href = `update-ticket?ticketXref_id=${ticketXref_id}`;
             console.log(content);
           });
         });
