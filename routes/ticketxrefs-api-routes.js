@@ -43,36 +43,36 @@ module.exports = function (app) {
   });
 
   // Get route for retrieving a single ticket
-  app.get("/api/ticketxrefs/:id", function(req, res) {
+  app.get('/api/ticketxrefs/:id', (req, res) => {
     db.TicketXref.findOne({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
       include: [
-        {model: db.Status},
-        {model: db.User},
-        {model: db.TicketLocation},
-        {model: db.Ticket},
-        {model: db.Category}
+        { model: db.Status },
+        { model: db.User },
+        { model: db.TicketLocation },
+        { model: db.Ticket },
+        { model: db.Category },
       ],
-    }).then(function(dbTicket) {
+    }).then((dbTicket) => {
       console.log(dbTicket);
       res.json(dbTicket);
     });
   });
 
   // POST route for saving a new ticket
-  app.post("/api/ticketxrefs", function(req, res) {
+  app.post('/api/ticketxrefs', (req, res) => {
     console.log(req.body);
     db.TicketXref.create(
-      req.body
-    ).then(function(dbTickets) {
+      req.body,
+    ).then((dbTickets) => {
       res.json(dbTickets);
     });
   });
 
   // DELETE route for deleting ticketxrefs
-  app.delete("/api/ticketxrefs/:id", function(req, res) {
+  app.delete('/api/ticketxrefs/:id', (req, res) => {
     db.TicketXref.destroy({
       where: {
         id: req.params.id,
@@ -83,7 +83,7 @@ module.exports = function (app) {
   });
 
   // PUT route for updating ticketxrefs
-  app.put("/api/ticketxrefs", function(req, res) {
+  app.put('/api/ticketxrefs', (req, res) => {
     db.TicketXref.update(
       req.body,
       {
