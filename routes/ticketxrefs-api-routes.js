@@ -6,16 +6,15 @@
 // =============================================================
 
 // Requiring our models
-var db = require("../models");
+const db = require('../models');
 
 // Routes
 // =============================================================
-module.exports = function(app) {
-
+module.exports = function (app) {
   // GET route for getting all of the tickets
-  app.get("/api/ticketxrefs", function(req, res) {
-      console.log("ok");
-    var query = {};
+  app.get('/api/ticketxrefs', (req, res) => {
+    console.log('ok');
+    const query = {};
     if (req.query.user_id) {
       query.UserId = req.query.user_id;
     } else if (req.query.ticket_id) {
@@ -24,21 +23,21 @@ module.exports = function(app) {
     console.log(query);
     db.TicketXref.findAll({
       where: query,
-    //   include: [db.Ticket],
-    //   include: [db.Category],
-    //   include: [db.TicketLocation],
-    //   include: [db.User],
+      //   include: [db.Ticket],
+      //   include: [db.Category],
+      //   include: [db.TicketLocation],
+      //   include: [db.User],
       include: [
-          {model: db.Status},
-          {model: db.User},
-          {model: db.TicketLocation},
-          {model: db.Ticket},
-          {model: db.Category}
-        ],
-      
-    }).then(function(dbTickets) {
+        { model: db.Status },
+        { model: db.User },
+        { model: db.TicketLocation },
+        { model: db.Ticket },
+        { model: db.Category },
+      ],
+
+    }).then((dbTickets) => {
     //   console.log(dbTickets);
-      //console.log(dbTickets[0].location);
+      // console.log(dbTickets[0].location);
       res.json(dbTickets);
     });
   });
@@ -76,9 +75,9 @@ module.exports = function(app) {
   app.delete("/api/ticketxrefs/:id", function(req, res) {
     db.TicketXref.destroy({
       where: {
-        id: req.params.id
-      }
-    }).then(function(dbTickets) {
+        id: req.params.id,
+      },
+    }).then((dbTickets) => {
       res.json(dbTickets);
     });
   });
@@ -89,9 +88,10 @@ module.exports = function(app) {
       req.body,
       {
         where: {
-          id: req.body.id
-        }
-      }).then(function(dbTickets) {
+          id: req.body.id,
+        },
+      },
+    ).then((dbTickets) => {
       res.json(dbTickets);
     });
   });
