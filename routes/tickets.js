@@ -2,7 +2,7 @@ const ticketController = require('../controllers/ticket-controller');
 
 module.exports = (app) => {
   app.get('/ticket', (req, res) => {
-    res.render('ticket');
+    res.render('ticket', { title: 'ticket' });
   });
 
   app.post('/api/ticket', (req, res) => {

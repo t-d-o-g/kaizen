@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   });
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     User.hasMany(models.TicketXref, {
-      onDelete: "cascade"
+      onDelete: 'cascade',
     });
   };
   return User;
