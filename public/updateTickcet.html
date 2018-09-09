@@ -21,18 +21,21 @@
     <div class="container hidden">
         <div class="row top-30">
           <div class="col-md-2 col-sm-2">
-            <a class="btn btn-light" href="/">Go to Homepage</a>
+            <a class="btn btn-primary" href="/">Go to Homepage</a>
           </div>
           <div class="col-md-2 col-sm-2">
-            <a class="btn btn-light" href="/registration">Registration Here</a>
+            <a class="btn btn-primary" href="/registration">Registration Here</a>
           </div>
         </div>
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <form id="cms">
                     <div class="form-group">
-                        <label for="category">Category:</label>
-                        <input placeholder="Ticket Category" type="text" class="form-control" id="category">
+                        <div class="form-group">
+                            <label for="category">Select Category:</label>
+                            <select class="custom-select" id="category">
+                            </select>
+                        </div>
                         <br />
                         <label for="ticket">Ticket:</label>
                         <textarea placeholder="Ticket Body" class="form-control" rows="10" id="ticket"></textarea>

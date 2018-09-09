@@ -18,7 +18,10 @@ module.exports = function(app) {
     var query = {};
     if (req.query.user_id) {
       query.UserId = req.query.user_id;
+    } else if (req.query.ticket_id) {
+      query.TicketId = req.query.ticket_id;
     }
+    console.log(query);
     db.TicketXref.findAll({
       where: query,
     //   include: [db.Ticket],
@@ -41,38 +44,37 @@ module.exports = function(app) {
   });
 
   // Get route for retrieving a single ticket
-  app.get("/api/tickets/:id", function(req, res) {
-    db.Tickets.findOne({
+  app.get("/api/ticketxrefs/:id", function(req, res) {
+    db.TicketXref.findOne({
       where: {
         id: req.params.id
-      }
-    }).then(function(dbTickets) {
-      console.log(dbTickets);
-      res.json(dbTickets);
+      },
+      include: [
+        {model: db.Status},
+        {model: db.User},
+        {model: db.TicketLocation},
+        {model: db.Ticket},
+        {model: db.Category}
+      ],
+    }).then(function(dbTicket) {
+      console.log(dbTicket);
+      res.json(dbTicket);
     });
   });
 
   // POST route for saving a new ticket
-  app.post("/api/tickets", function(req, res) {
+  app.post("/api/ticketxrefs", function(req, res) {
     console.log(req.body);
-    var point = {type: 'Point',coordinates: [39.807222,-76.984722]}
-    db.Tickets.create({
-
-      category:"traffic",
-      title:"red light",
-      description:"no red/green light across the road",
-      location:db.sequelize.fn("ST_GeomFromText", 'POINT(12 11)'),
-      status:"open",
-      UserId:"1"
-
-    }).then(function(dbTickets) {
+    db.TicketXref.create(
+      req.body
+    ).then(function(dbTickets) {
       res.json(dbTickets);
     });
   });
 
-  // DELETE route for deleting tickets
-  app.delete("/api/tickets/:id", function(req, res) {
-    db.Tickets.destroy({
+  // DELETE route for deleting ticketxrefs
+  app.delete("/api/ticketxrefs/:id", function(req, res) {
+    db.TicketXref.destroy({
       where: {
         id: req.params.id
       }
@@ -81,9 +83,9 @@ module.exports = function(app) {
     });
   });
 
-  // PUT route for updating tickets
-  app.put("/api/tickets", function(req, res) {
-    db.Tickets.update(
+  // PUT route for updating ticketxrefs
+  app.put("/api/ticketxrefs", function(req, res) {
+    db.TicketXref.update(
       req.body,
       {
         where: {

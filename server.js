@@ -38,6 +38,11 @@ require('./routes/post-api-routes.js')(app);
 // VIK_TODO: Find out how to enable it in development mode only
 require('./routes/api-seed.js')(app);
 require('./routes/ticketxrefs-api-routes.js')(app);
+require('./routes/users-api-routes.js')(app);
+require('./routes/status-api-routes.js')(app);
+require('./routes/category-api-routes.js')(app);
+require('./routes/tickets-api-routes.js')(app);
+
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
