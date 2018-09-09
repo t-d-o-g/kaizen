@@ -6,7 +6,7 @@ const infowindows = [];
 // Define initialize map Function
 function initialize_map() {
   map = new google.maps.Map(document.getElementById('map-container'), {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat: 40.753050, lng: -74.011888 },
     zoom: 10,
   });
 
@@ -82,10 +82,11 @@ function initialize_map() {
       (function (markers, i) {
         google.maps.event.addListener(markers[i], 'click', function (event) {
           console.log(this.data.Ticket.ticket);
+          const ticketXref_id = this.data.id;
           infowindows[i].open(map, markers[i]);
 
           $('#update').on('click', () => {
-            const content = $('#issue').text();
+            window.location.href ="updateTickcet.html?ticketXref_id=" + ticketXref_id;
             console.log(content);
           });
         });
