@@ -84,7 +84,7 @@ function initialize_map() {
           infowindows[i].open(map, markers[i]);
 
           $('#update').on('click', () => {
-            window.location.href ="updateTickcet.html?ticketXref_id=" + ticketXref_id;
+            window.location.href = `updateTickcet.html?ticketXref_id=${ticketXref_id}`;
             console.log(content);
           });
         });
