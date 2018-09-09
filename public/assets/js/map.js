@@ -12,14 +12,14 @@ function initialize_map() {
 
   // Try code getting data from server here
   //------------------------------------------------
-  var tickets;
+  let tickets;
 
   // The code below handles the case where we want to get all tickets for a specific user
   // Looks for a query param in the url for user_id
-  var url = window.location.search;
-  var userId;
-  if (url.indexOf("?user_id=") !== -1) {
-    userId = url.split("=")[1];
+  const url = window.location.search;
+  let userId;
+  if (url.indexOf('?user_id=') !== -1) {
+    userId = url.split('=')[1];
     getTickets(userId);
   }
   // If there's no ticketId we just get all tickets as usual
@@ -29,28 +29,27 @@ function initialize_map() {
 
   // This function grabs tickets from the database and updates the view
   function getTickets(user) {
-    userId = user || "";
+    userId = user || '';
     if (userId) {
-      userId = "/?user_id=" + userId;
+      userId = `/?user_id=${userId}`;
     }
-    $.get("/api/ticketxrefs" + userId, function(data) {
-      console.log("Tickets", data);
+    $.get(`/api/ticketxrefs${userId}`, (data) => {
+      console.log('Tickets', data);
       tickets = data;
       if (!tickets || !tickets.length) {
         // alertEmpty();
-        //console.log("no tickets yet");
-      }
-      else {
+        // console.log("no tickets yet");
+      } else {
         initializeMarkers();
         initializeEvents();
-        //console.log(tickets);
+        // console.log(tickets);
       }
     });
   }
 
   // InitializeRows markers
   function initializeMarkers() {
-    for (var i = 0; i < tickets.length; i++) {
+    for (let i = 0; i < tickets.length; i++) {
       const coords = tickets[i].TicketLocation.location.coordinates;
       const latLng = new google.maps.LatLng(coords[0], coords[1]);
       const marker = new google.maps.Marker({
@@ -59,13 +58,13 @@ function initialize_map() {
         data: tickets[i],
       });
 
-      inforwindowContent = '<div class = "info_content">'
-                                 + '<h3>Category: ' + tickets[i].Category.category +'</h3>'
-                                 + '<b>User</b>: ' + tickets[i].User.username
-                                 + '<p id = "issue">'+ '<b>Description</b>: ' + tickets[i].Ticket.ticket+'</p>'
-                                 + '<p>' + '<b>Status</b>: '+ tickets[i].Status.status+ '</p>'
+      inforwindowContent = `${'<div class = "info_content">'
+                                 + '<h3>Category: '}${tickets[i].Category.category}</h3>`
+                                 + `<b>User</b>: ${tickets[i].User.username
+                                 }<p id = "issue">` + `<b>Description</b>: ${tickets[i].Ticket.ticket}</p>`
+                                 + '<p>' + `<b>Status</b>: ${tickets[i].Status.status}</p>`
                                  + '<button type="button" class="btn btn-primary" id = "update">Review</button>';
-                                 + '</div>';
+      +'</div>';
       infowindow = new google.maps.InfoWindow({
         content: inforwindowContent,
         maxWidth: 200,
@@ -73,12 +72,11 @@ function initialize_map() {
 
       markers.push(marker);
       infowindows.push(infowindow);
-
     }
   }
 
   function initializeEvents() {
-    for (var i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i++) {
       (function (markers, i) {
         google.maps.event.addListener(markers[i], 'click', function (event) {
           console.log(this.data.Ticket.ticket);
@@ -91,11 +89,10 @@ function initialize_map() {
         });
       }(markers, i));
     }
-
   }
 
   function alertEmpty() {
-    alert("There is no tickets related yet");
+    alert('There is no tickets related yet');
   }
 
   //----------------------------------------------------------
