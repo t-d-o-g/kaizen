@@ -45,7 +45,8 @@ footer {
   width: 50%; }
 
 .img-nav {
-  width: 15%; }
+  width: 8%;
+  height: auto; }
 
 .navbar-nav {
   -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
