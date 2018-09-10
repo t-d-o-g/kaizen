@@ -45,7 +45,7 @@ footer {
   width: 50%; }
 
 .img-nav {
-  width: 8%;
+  width: 25%;
   height: auto; }
 
 .navbar-nav {
@@ -59,12 +59,6 @@ footer {
 
 .info-content {
   background-color: darkcyan; }
-
-#login-links {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  padding: 5%; }
 
 #map-container {
   height: 75vh; }
