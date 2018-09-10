@@ -58,7 +58,7 @@ function initialize_map() {
         data: tickets[i],
       });
 
-      infowindowContent = `${'<div class = "info_content">'
+      infowindowContent = `${'<div class = "info-content">'
                                  + '<h3>Category: '}${tickets[i].Category.category}</h3>`
                                  + `<b>User</b>: ${tickets[i].User.username
                                  }<p id = "issue">` + `<b>Description</b>: ${tickets[i].Ticket.ticket}</p>`
