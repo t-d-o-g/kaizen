@@ -32,10 +32,11 @@ $(document).ready(() => {
 
 
   function submitUser(User) {
-    $.post('/api/user-registration/', User, () => {
+    $.post('/api/user-registration/', User, (resp) => {
       //   window.location.href = "/registration";
       console.log('user added');
       // getMapPage();
+      document.cookie = `kaizen72441_uuid=${resp.uuid}`;
       window.location = '/';
     });
   }
