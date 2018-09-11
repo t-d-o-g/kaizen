@@ -16,4 +16,14 @@ module.exports = function(app) {
       res.json(dbTickets);
     });
   });
+
+
+  app.post("/api/tickets", function(req, res) {
+    db.Ticket.create(
+      req.body
+    ).then(function(dbTickets) {
+      res.json(dbTickets);
+    });
+  });
+  
 };
