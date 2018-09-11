@@ -69,21 +69,30 @@ $(document).ready(() => {
       updateTicketXref(newTicketXref);
       updateTicket(newTicket);
     } else {
-      submitTicketXref(newTicketXref);
       submitTicket(newTicket);
     }
+  }
+
+  // Submits a new ticket and brings user to home page upon completion
+  function submitTicket(Ticket) {
+    //TODO: Add TicketLocation to db on submit
+    // it is temporarily hardcoded to fake data.
+    $.post('/api/tickets', Ticket, (data) => {
+      const ticketXref = {
+        CategoryId: categorySelect.val(),
+        StatusId: statusSelect.val(),
+        TicketLocationId: "5",
+        TicketId: data.id,
+        UserId: userSelect.val(),
+      };
+
+      submitTicketXref(ticketXref);
+    });
   }
 
   // Submits a new ticketxrefs and brings user to home page upon completion
   function submitTicketXref(TicketXref) {
     $.post('/api/ticketxrefs', TicketXref, () => {
-      window.location.href = '/';
-    });
-  }
-
-  // Submits a new ticket and brings user to home page upon completion
-  function submitTicket(Ticket) {
-    $.post('/api/tickets', Ticket, () => {
       window.location.href = '/';
     });
   }
