@@ -4,7 +4,6 @@ const db = require('../models');
 // Routes
 // =============================================================
 module.exports = function (app) {
-
   // GET route for updating tickets
   app.get('/ticket', (req, res) => {
     res.render('ticket', { title: 'Improve It', js: ['ticket.js'] });
