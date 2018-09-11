@@ -33,10 +33,6 @@ span.input-group-addon i {
   color: #009edf;
   font-size: 17px; }
 
-a {
-  color: yellow;
-}
-
 .main {
   margin: 50px 15px; }
 
@@ -100,11 +96,6 @@ a {
   height: 500px;
   overflow: hidden !important;
   -webkit-overflow-scrolling: touch; }
-
- /* #email:invalid {
-  border-color: red;
-  border-width: 5px;
-}  */
 
 #button {
   border: 1px solid #ccc;

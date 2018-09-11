@@ -1,0 +1,25 @@
+body {
+    margin: 10px;
+    background-color: dimgray
+}
+
+#form-container {
+    background-color: cyan;
+    border-radius: 25px;
+}
+
+#map-container {
+    border-radius: 25px;
+}
+
+/* Set the size of the div element that contains the map */
+.jumbotron {
+    display: flex;
+    justify-content: center;
+    padding: 0%; }
+
+  .img-rounded {
+    height: 100px;
+    /* The height is 400 pixels */
+    width: 25%;
+    /* The width is the width of the web page */ }
