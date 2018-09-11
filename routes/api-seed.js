@@ -45,7 +45,7 @@ module.exports = (app) => {
   }
 
   function randomNum(min, max, prec) {
-    return ( min + (Math.random() * (10**prec) / (10**prec) + (max - min - 1)) );
+    return (min + (Math.random() * (10 ** prec) / (10 ** prec) + (max - min - 1)));
   }
 
   async function seedTicket() {
@@ -83,7 +83,7 @@ module.exports = (app) => {
       TicketLocationId: promises[4].id,
     };
 
-  db.TicketXref.create(xref);
+    db.TicketXref.create(xref);
   }
 
   function seedTheTickets() {

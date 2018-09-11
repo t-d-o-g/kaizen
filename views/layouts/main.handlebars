@@ -2,25 +2,45 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>Kaizen</title>
+    {{!-- <title>Kaizen</title> --}}
+    <title>{{title}}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/style.css" onerror="sheetError()">
   </head>
   <body>
-    <div class="jumbotron">
-        <h1><i class="fa fa-globe fa-lg"></i> Improve Our Livings</h1> 
-        <hr> 
-        <img src="assets/images/Blog-Kaizen.png" class = "img-rounded" alt="kaizen">
-    </div>
+    <nav class="navbar-nav">
+      <div class="d-flex justify-content-around flex-nowrap">
+        <a class="navbar-brand col-4 m-2" href="/">
+          <img src="assets/images/kaizen.png" class="img-nav rounded" alt="kaizen">
+        </a>
+        <span class="col-4 m-auto" id="heading">
+          <h1>Kaizen!</h1>
+          <hr id="heading-ul" class="m-0 col-3">
+        </span>
+        <span class="d-flex m-3" id="login-links">
+          <p><a href="/registration">Register</a> | <a href="/login">Login</a> </p>
+        </span>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <h2><i class="fa fa-globe fa-lg"></i> Improve Our Livings</h2> 
+      </div>
+    </nav>
     {{{body}}}
-    <link rel="stylesheet" href="assets/css/style.css" onerror="sheetError()">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyAZIE3fq0VTm17lJmkctW8VLpEnHhQ1iZk"></script>
-    <script src="assets/js/map.js" type="text/javascript"></script>
-    <script src="assets/js/registration.js" type="text/javascript"></script>
-    <script src="assets/js/login.js" type="text/javascript"></script>
+    {{#each js}}
+      <script src="assets/js/{{this}}" type="text/javascript"></script>
+    {{/each}}
   </body>
+  <footer class="footer navbar-fixed-bottom font-small p-5 text-center">
+    <p>
+      <hr class="w-50 p-4">
+        <small>2018</small>
+      </hr>
+    </p>
+  </footer>
 </html>
