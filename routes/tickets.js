@@ -2,7 +2,7 @@ const ticketController = require('../controllers/ticket-controller');
 
 module.exports = (app) => {
   app.get('/ticket', (req, res) => {
-    res.render('ticket', { title: 'ticket' });
+    res.render('ticket', { title: 'Improve It', js: ['ticket.js'] });
   });
 
   app.get('/update-ticket', (req, res) => {
