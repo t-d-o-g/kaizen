@@ -1,4 +1,5 @@
 .DS_Store
 .vscode
 .env
+.history
 node_modules

@@ -1,37 +1,32 @@
 <div class="container">
-    <div class="row main">
-        <div class="main-login main-center">
+  <div class="row main mx-auto">
+    <div class="main-center rounded">
+      <form id="login" method="post" action="#">
 
-            <form class="" id="login" method="post" action="#">
-
-                <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-users fa" aria-hidden="true"></i>
-                            </span>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password" class="cols-sm-2 control-label">Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-                            </span>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
-
-
-            </form>
+        <div class="form-group">
+          <label for="username" class="cols-sm-2 control-label">Username</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon m-2"></span>
+              <input type="text" class="form-control rounded" name="username" id="username" placeholder="Enter your Username" required/>
+            </div>
+          </div>
         </div>
+
+        <div class="form-group">
+          <label for="password" class="cols-sm-2 control-label">Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon m-2"></span>
+              <input type="password" class="form-control rounded" name="password" id="password" placeholder="Enter your Password" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions text-center">
+          <button type="submit" class="btn btn-primary btn-lg submit-button">Login</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

@@ -16,7 +16,8 @@ $(() => {
     }
 
     $.post('/api/login', uidPwd, (resp) => {
-      if (resp === 'ok') {
+      if (resp !== 'failed') {
+        document.cookie = `kaizen72441_uuid=${resp.uuid}`;
         window.location = '/';
       } else {
         // VIK_TODO: Do it without alert
