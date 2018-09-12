@@ -15,7 +15,7 @@ $(() => {
   const uuid = getCookie('kaizen72441_uuid');
 
   if (uuid) {
-    const ticketLink = `<h2><a href="/ticket?author_id=${uuid}">Improve It!</a><h2>`;
+    const ticketLink = '<h2><a href="/createTicket.html">Improve It!</a><h2>';
     const logoutLink = '<p><a href="#">Logout</a>';
     $('#ticket-link').append(ticketLink);
     $('#login-links').append(logoutLink);

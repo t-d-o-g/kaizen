@@ -28,10 +28,10 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/api/tickets", function(req, res) {
+  app.post('/api/tickets', (req, res) => {
     db.Ticket.create(
-      req.body
-    ).then(function(dbTickets) {
+      req.body,
+    ).then((dbTickets) => {
       res.json(dbTickets);
     });
   });

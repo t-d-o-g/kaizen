@@ -6,7 +6,6 @@ var lng;
  var categorySelect = $("#category");
  var ticketInput = $("#ticket");
  var statusSelect = $("#status");
- var userSelect = $("#user");
  var cmsForm = $("#cms");
  var locationInput = $("#location");
  var ticketLocationId;
@@ -18,7 +17,6 @@ var lng;
  async function getData() {
      await getDbData("category");
      await getDbData("status");
-     getDbData("user");
  }
 
  getData();
@@ -28,7 +26,7 @@ var lng;
  function handleFormSubmit(event) {
     event.preventDefault();
     // Wont submit the ticket if we are missing a category, ticket, status or user
-    if (!ticketInput.val().trim() || !categorySelect.val() || !statusSelect.val() || !userSelect.val()) {
+    if (!ticketInput.val().trim() || !categorySelect.val() || !statusSelect.val()) {
     return;
     }
     // Constructing a new Ticket new Location and new TicketXref object to hand to the database
@@ -42,8 +40,17 @@ var lng;
         .val()
         .trim(),
     }; 
-    
 
+    getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+      return undefined;
+    };
+  
+    const uuid = getCookie('kaizen72441_uuid');
 
     async function submitData() {
         await submitTicket(newTicket);
@@ -53,8 +60,9 @@ var lng;
             StatusId: statusSelect.val(),
             TicketLocationId: ticketLocationId,
             TicketId: ticketId,
-            UserId: userSelect.val()
+            UserId: uuid 
           };
+
         submitTicketXref(newTicketXref);
     };
 
@@ -82,13 +90,6 @@ var lng;
             ref = "status";
             formSelect = statusSelect;
             dataProperty = "status";
-            break;
-        case "user":
-            queryUrl = "/api/users";
-            ref = "users";
-            formSelect = userSelect;
-            dataProperty = "first_name";
-            
             break;
         default:
             return;
