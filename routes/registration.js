@@ -1,5 +1,5 @@
 module.exports = (app) => {
   app.get('/registration', (req, res) => {
-    res.render('registration');
+    res.render('registration', { title: 'Registration', js: ['registration.js'] });
   });
 };
