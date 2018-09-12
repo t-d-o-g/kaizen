@@ -6,20 +6,20 @@ const infowindows = [];
 // Define initialize map Function
 function initialize_map() {
   map = new google.maps.Map(document.getElementById('map-container'), {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat: 40.753050, lng: -74.011888 },
     zoom: 10,
   });
 
   // Try code getting data from server here
   //------------------------------------------------
-  var tickets;
+  let tickets;
 
   // The code below handles the case where we want to get all tickets for a specific user
   // Looks for a query param in the url for user_id
-  var url = window.location.search;
-  var userId;
-  if (url.indexOf("?user_id=") !== -1) {
-    userId = url.split("=")[1];
+  const url = window.location.search;
+  let userId;
+  if (url.indexOf('?user_id=') !== -1) {
+    userId = url.split('=')[1];
     getTickets(userId);
   }
   // If there's no ticketId we just get all tickets as usual
@@ -29,28 +29,27 @@ function initialize_map() {
 
   // This function grabs tickets from the database and updates the view
   function getTickets(user) {
-    userId = user || "";
+    userId = user || '';
     if (userId) {
-      userId = "/?user_id=" + userId;
+      userId = `/?user_id=${userId}`;
     }
-    $.get("/api/ticketxrefs" + userId, function(data) {
-      console.log("Tickets", data);
+    $.get(`/api/ticketxrefs${userId}`, (data) => {
+      console.log('Tickets', data);
       tickets = data;
       if (!tickets || !tickets.length) {
         // alertEmpty();
-        //console.log("no tickets yet");
-      }
-      else {
+        // console.log("no tickets yet");
+      } else {
         initializeMarkers();
         initializeEvents();
-        //console.log(tickets);
+        // console.log(tickets);
       }
     });
   }
 
   // InitializeRows markers
   function initializeMarkers() {
-    for (var i = 0; i < tickets.length; i++) {
+    for (let i = 0; i < tickets.length; i++) {
       const coords = tickets[i].TicketLocation.location.coordinates;
       const latLng = new google.maps.LatLng(coords[0], coords[1]);
       const marker = new google.maps.Marker({
@@ -59,43 +58,42 @@ function initialize_map() {
         data: tickets[i],
       });
 
-      inforwindowContent = '<div class = "info_content">'
-                                 + '<h3>Category: ' + tickets[i].Category.category +'</h3>'
-                                 + '<b>User</b>: ' + tickets[i].User.username
-                                 + '<p id = "issue">'+ '<b>Description</b>: ' + tickets[i].Ticket.ticket+'</p>'
-                                 + '<p>' + '<b>Status</b>: '+ tickets[i].Status.status+ '</p>'
+      infowindowContent = `${'<div class = "info-content">'
+                                 + '<h3>Category: '}${tickets[i].Category.category}</h3>`
+                                 + `<b>User</b>: ${tickets[i].User.username
+                                 }<p id = "issue">` + `<b>Description</b>: ${tickets[i].Ticket.ticket}</p>`
+                                 + '<p>' + `<b>Status</b>: ${tickets[i].Status.status}</p>`
                                  + '<button type="button" class="btn btn-primary" id = "update">Review</button>';
-                                 + '</div>';
+      +'</div>';
       infowindow = new google.maps.InfoWindow({
-        content: inforwindowContent,
+        content: infowindowContent,
         maxWidth: 200,
       });
 
       markers.push(marker);
       infowindows.push(infowindow);
-
     }
   }
 
   function initializeEvents() {
-    for (var i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i++) {
       (function (markers, i) {
         google.maps.event.addListener(markers[i], 'click', function (event) {
           console.log(this.data.Ticket.ticket);
+          const ticketXref_id = this.data.id;
           infowindows[i].open(map, markers[i]);
 
           $('#update').on('click', () => {
-            const content = $('#issue').text();
+            window.location.href = `update-ticket?ticketXref_id=${ticketXref_id}`;
             console.log(content);
           });
         });
       }(markers, i));
     }
-
   }
 
   function alertEmpty() {
-    alert("There is no tickets related yet");
+    alert('There is no tickets related yet');
   }
 
   //----------------------------------------------------------
