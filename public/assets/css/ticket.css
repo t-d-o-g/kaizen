@@ -1,6 +1,8 @@
 body {
     margin: 10px;
-    background-color: dimgray
+    background-repeat: no-repeat;
+    background:url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
+    background-size: cover;
 }
 
 #form-container {
@@ -14,6 +16,7 @@ body {
 
 /* Set the size of the div element that contains the map */
 .jumbotron {
+    background-color: rgb(215, 237, 250);
     display: flex;
     justify-content: center;
     padding: 0%; }

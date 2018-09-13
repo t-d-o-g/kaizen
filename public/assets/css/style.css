@@ -3,7 +3,8 @@ body {
   background-repeat: no-repeat;
   background: url(https://i.ytimg.com/vi/4kfXjatgeEU/maxresdefault.jpg);
   font-family: 'Oxygen', sans-serif;
-  background-size: cover; }
+  background-size: cover;
+  margin: 10px; }
 
 hr {
   width: 100%;
@@ -17,20 +18,20 @@ input::-webkit-input-placeholder {
   padding-top: 3px; }
 
 footer {
-  height: 20px;
   text-shadow: none;
   -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
   -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31); }
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
+  background-color: #d7edfa; }
 
 .main {
-  margin: 10%; }
+  margin: 3%; }
 
 .main-map-center {
   margin: auto;
   width: 100%;
   padding: 10px 40px;
-  background: #009edf;
+  background: dimgray;
   text-shadow: none;
   -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
   -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
@@ -40,7 +41,7 @@ footer {
   margin: auto;
   width: 100%;
   padding: 10px 40px;
-  background: #009edf;
+  background: dimgray;
   text-shadow: none;
   -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
   -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
@@ -54,7 +55,7 @@ footer {
   width: 50%; }
 
 .img-nav {
-  width: 25%;
+  width: 15%;
   height: auto; }
 
 .navbar-nav {
@@ -70,11 +71,23 @@ footer {
   background-color: white; } */
 
 #map-container {
-  height: 75vh; }
+  height: 75vh;
+  border-radius: 25px; }
+
+.jumbotron {
+  background-color: #d7edfa; }
+
+#footer-container {
+  display: inline-block;
+  text-align: right; }
+
+#ticket-link {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center; }
 
 .col-sm {
-  background-color: rgb(215, 237, 250);
-}
+  background-color: #d7edfa; }
 
 .login-row {
   margin: 2%;
@@ -141,4 +154,4 @@ footer {
     background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
     background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
     background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-  } 
+  }
