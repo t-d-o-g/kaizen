@@ -7,7 +7,6 @@ $(document).ready(() => {
   const password = $('#password');
   const username = $('#username');
 
-
   // Adding an event listener for when the form is submitted
   $('#registration').on('submit', (event) => {
     event.preventDefault();
