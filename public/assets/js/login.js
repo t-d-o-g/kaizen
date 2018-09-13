@@ -5,8 +5,8 @@ $(() => {
     evt.preventDefault();
 
     const uidPwd = {
-      username: $('#username').val().trim(),
-      password: $('#password').val().trim(),
+      username: $('#login-username').val().trim(),
+      password: $('#login-password').val().trim(),
     };
 
     // VIK_TODO: Instead of alert do it in better way

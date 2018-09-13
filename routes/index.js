@@ -4,6 +4,6 @@ module.exports = (app) => {
   });
 
   app.get('/login', (req, res) => {
-    res.render('login', { title: 'Login', js: ['login.js'] });
+    res.render('login-signup', { title: 'Login', js: ['login.js', 'registration.js'] });
   });
 };
