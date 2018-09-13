@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row login-row mx-auto">
+      <div class="col">
+    <h1> Login or Register </h1>
+      </div>
+  </div>
+  {{!-- <div class="row main mx-auto"> --}}
+  <div class="row login-row mx-auto">
+      <div class="col-sm border border-right-0 border-secondary">
+    {{!-- <div class="main-center rounded"> --}}
+        <br>
+        <h4> Login to your Account </h4>
+        <br>
+      <form id="login" method="post" action="#">
+
+        <div class="form-group">
+          {{!-- <label for="login-username" class="cols-sm-2 control-label">Username</label> --}}
+          <label for="login-username">Username</label>
+          {{!-- <div class="cols-sm-10"> --}}
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="text" class="form-control rounded" name="login-username" id="login-username" placeholder="Enter your Username" required/>
+            </div>
+          {{!-- </div> --}}
+        </div>
+
+        <div class="form-group">
+          <label for="login-password" class="cols-sm-2 control-label">Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="password" class="form-control rounded" name="login-password" id="login-password" placeholder="Enter your Password" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions text-center">
+          <button type="submit" class="btn btn-primary btn-lg submit-button">Login</button>
+        </div>
+      </form>
+    {{!-- </div> --}}
+  </div>
+    <div class="col-sm border border-secondary">
+        <br>
+        <h4> Not a Kaizen member? Sign up </h4>
+        <br>
+    {{!-- <div class="main-center rounded"> --}}
+      <form id="registration" method="post" action="#">
+        
+        <div class="form-group">
+          <label for="name" class="cols-sm-2 control-label">First Name</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="text" class="form-control rounded" name="fname" id="fname"  placeholder="Enter your First Name" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="cols-sm-2 control-label">Last  Name</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="text" class="form-control rounded" name="lname" id="lname"  placeholder="Enter your Last Name"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="cols-sm-2 control-label">Email</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="email" class="form-control rounded" name="email" id="email"  placeholder="Enter your Email" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="username" class="cols-sm-2 control-label">Username</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="text" class="form-control rounded" name="username" id="username"  placeholder="Enter your Username" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="cols-sm-2 control-label">Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              {{!-- <span class="input-group-addon m-2"></span> --}}
+              <input type="password" class="form-control rounded" name="password" id="password"  placeholder="Enter your Password" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions text-center">
+          <button type="submit" class="btn btn-primary btn-lg submit-button">Register</button>
+        </div>
+      </form>
+      <br>
+    {{!-- </div> --}}
+
+    </div>
+  </div>
+</div>

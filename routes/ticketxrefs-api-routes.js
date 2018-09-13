@@ -13,7 +13,7 @@ const db = require('../models');
 module.exports = function (app) {
   // GET route for getting all of the tickets
   app.get('/api/ticketxrefs', (req, res) => {
-    console.log('ok');
+    console.log(req);;
     const query = {};
     if (req.query.user_id) {
       query.UserId = req.query.user_id;

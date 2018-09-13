@@ -45,7 +45,7 @@ module.exports = (app) => {
   }
 
   function randomNum(min, max, prec) {
-    return (min + (Math.random() * (10 ** prec) / (10 ** prec) + (max - min - 1)));
+    return (min + (Math.random() * (10 ** prec) / (10 ** prec) * (max - min))).toFixed(prec);
   }
 
   async function seedTicket() {
@@ -63,8 +63,8 @@ module.exports = (app) => {
     });
     const ticket = db.Ticket.create({ ticket: faker.lorem.sentence() });
 
-    const lat = randomNum(40, 41, 8).toFixed(8);
-    const lng = randomNum(-75, -74, 13).toFixed(13);
+    const lat = randomNum(40.6, 40.9, 8);
+    const lng = randomNum(-74.4, -74, 13);
 
     // let lat = 40.73072195;
     // let lng = -74.0659347096384;

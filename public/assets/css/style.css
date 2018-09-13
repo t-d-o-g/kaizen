@@ -71,3 +71,11 @@ footer {
 
 #map-container {
   height: 75vh; }
+
+.col-sm {
+  background-color: rgb(215, 237, 250);
+}
+
+.login-row {
+  margin: 2%;
+}
