@@ -147,7 +147,7 @@ async function submitTicketXref(TicketXref) {
   await $.post('/api/ticketxrefs', TicketXref, (data) => {
     console.log(data);
     // alert("Your Ticket has been submitted");
-    window.location.href = '/confirmation';
+    window.location.href = '/confirmation.html';
   });
 }
 
