@@ -10,6 +10,7 @@ const cmsForm = $('#cms');
 const locationInput = $('#location');
 let ticketLocationId;
 let ticketId;
+let userId;
 
 // Adding an event listener for when the form is submitted
 $(cmsForm).on('submit', handleFormSubmit);
@@ -55,12 +56,15 @@ function handleFormSubmit(event) {
   async function submitData() {
     await submitTicket(newTicket);
     await submitLocation(newLocation);
+    await $.get('/api/users/'+uuid, function(data){
+      userId = data.id;
+    });
     const newTicketXref = {
       CategoryId: categorySelect.val(),
       StatusId: statusSelect.val(),
       TicketLocationId: ticketLocationId,
       TicketId: ticketId,
-      UserId: uuid,
+      UserId: userId,
     };
 
     submitTicketXref(newTicketXref);
@@ -145,7 +149,7 @@ async function submitTicketXref(TicketXref) {
   });
 }
 
-
+var previousMarker;
 // Define initialize map Function
 function initialize_map() {
   map = new google.maps.Map(document.getElementById('map-container'), {
@@ -169,35 +173,39 @@ function initialize_map() {
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
-  }
+  };
 
-  // This event listener will call addMarker() when the map is clicked.
-  map.addListener('click', (event) => {
-    addMarker(event.latLng);
-  });
+  //the following can't get the position because it's async
+  // navigator.geolocation.getCurrentPosition(function(position) {
+  //   lat = position.coords.latitude;
+  //   lng = position.coords.longitude;
+  // });
+  
 
-  // Adds a marker to the map
-  function addMarker(location) {
-    console.log(location);
-    const marker = new google.maps.Marker({
-      position: location,
-      map,
-    });
+  // var loc = `lat: ${lat} lng: ${lng}`;
+  // locationInput.val(loc);
 
-    lat = location.lat().toFixed(4);
-    lng = location.lng().toFixed(4);
+  map.addListener('click', function(e) {
+    // if the previousMarker exists, remove it
+    if (previousMarker)
+      previousMarker.setMap(null);
+
+    latLng = e.latLng;
+
+    lat = latLng.lat().toFixed(4);
+    lng = latLng.lng().toFixed(4);
     console.log(lat);
     console.log(lng);
 
     const loc = `lat: ${lat} lng: ${lng}`;
-    console.log(loc);
-    console.log(locationInput);
     locationInput.val(loc);
 
-    marker.addListener('click', () => {
-      marker.setMap(null);
+    previousMarker = new google.maps.Marker({
+      position: latLng,
+      map: map
     });
-  }
+  });
+
 }
 
 function handleLocationError(browserHasGeolocation, infowindow, pos) {

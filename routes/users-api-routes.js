@@ -12,7 +12,7 @@ module.exports = function (app) {
     // Find one User with the id in req.params.id and return them to the user with res.json
     db.User.findOne({
       where: {
-        id: req.params.id,
+        uuid: req.params.id,
       },
     }).then((dbUser) => {
       res.json(dbUser);
