@@ -71,12 +71,20 @@ footer {
   background-color: darkcyan; }
 
 #map-container {
-  height: 75vh; }
+  height: 75vh;
+  border-radius: 25px; }
+
+#footer-container {
+  display: inline-block;
+  text-align: right; }
+
+#ticket-link {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center; }
 
 .col-sm {
-  background-color: rgb(215, 237, 250);
-}
+  background-color: #d7edfa; }
 
 .login-row {
-  margin: 2%;
-}
+  margin: 2%; }
