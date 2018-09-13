@@ -20,7 +20,8 @@ $(() => {
     $('#ticket-link').append(ticketLink);
     $('#login-links').append(logoutLink);
   } else {
-    const loginLinks = '<p><a href="/registration">Register</a> | <a href="/login">Login</a> </p>';
+    // const loginLinks = '<p><a href="/registration">Register</a> | <a href="/login">Login</a> </p>';
+    const loginLinks = '<p><a href="/login">Login/Register</a> </p>';
     $('#login-links').append(loginLinks);
   }
 
