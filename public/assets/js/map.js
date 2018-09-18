@@ -66,14 +66,28 @@ const uuid = getCookie('kaizen72441_uuid');
 // InitializeRows markers
 function initializeMarkers(tickets) {
   for (let i = 0; i < tickets.length; i++) {
+    if(tickets[i].Category.id == 4) {
+      image = "http://maps.google.com/mapfiles/ms/icons/cabs.png";
+    }
+    else if((tickets[i].Category.id == 3)) {
+      image = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    }
+    else if((tickets[i].Category.id == 2)) {
+      image = "https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png";
+    }
+    else {
+      image = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+    }
+    
     const coords = tickets[i].TicketLocation.location.coordinates;
     const latLng = new google.maps.LatLng(coords[0], coords[1]);
     const marker = new google.maps.Marker({
       position: latLng,
       map,
       data: tickets[i],
+      icon: image
     });
-
+console.log("**************************************HERE"+ tickets[i].Category.id);
     const addButton = uuid ? tickets[i].User.uuid == uuid : false;
     let buttonHtml = "";
     if (addButton) {
