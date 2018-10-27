@@ -7,7 +7,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
-
+// const path = require("path");
+const cookieParser = require("cookie-parser");
+const expressSession = require("express-session");
+const passport = require("passport");
 // Sets up the Express App
 // =============================================================
 const app = express();
@@ -20,8 +23,20 @@ const db = require('./models');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(expressSession({ 
+  secret: 'keyboard cat',
+  resave: true, 
+  saveUninitialized: true,
+  secure: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.json());
 
 // Static directory
 app.use(express.static('public'));
@@ -41,6 +56,8 @@ require('./routes/status-api-routes.js')(app);
 require('./routes/category-api-routes.js')(app);
 require('./routes/tickets-api-routes.js')(app);
 require('./routes/locations-api-routes.js')(app);
+require('./routes/login-routes.js')(app, passport);
+
 // require('./routes/confirmation_bu')(app);
 
 // Syncing our sequelize models and then starting our Express app
