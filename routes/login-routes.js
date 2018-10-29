@@ -15,11 +15,11 @@ var LocalStrategy = require("passport-local").Strategy;
 module.exports = function(app, passport) {
     // Define our storage for user data in passport
     passport.serializeUser(function(user, done) {
-        done(null, user.email);
+        done(null, user.username);
     });
     
-    passport.deserializeUser(function(email, done) {
-        db.User.findAll({ where: {email: email }})
+    passport.deserializeUser(function(username, done) {
+        db.User.findAll({ where: {username: username }})
         .then(function (user) {
             done(null, user);
         })
@@ -30,15 +30,15 @@ module.exports = function(app, passport) {
         ;
     });
     passport.use(new LocalStrategy(
-        {usernameField:"email", passwordField:"password"},
-        function(email, password, done) {
+        {usernameField:"username", passwordField:"password"},
+        function(username, password, done) {
             db.User.findOne({ 
                 where: {
-                    email: email
+                    username: username
                 } 
             })
             .then( user => {
-                // can't find email case
+                // can't find username case
                 if(user == null){
                     return done(null, false);
                 }
@@ -46,7 +46,7 @@ module.exports = function(app, passport) {
                 else if(user.password !== password){
                     return done(null, false);
                 }
-                // finds the email and password matches
+                // finds the username and password matches
                 else{
                     return done(null, user);
                 }
@@ -62,12 +62,17 @@ module.exports = function(app, passport) {
         passport.authenticate('local', { /* failureRedirect: '/login' */ }),
         function(req, res) {
             // ?? email
-            console.log("test");
             console.log(req.user)
             console.log(req.isAuthenticated());
             if(req.isAuthenticated()){
+                const u = req.user
                 res.json({
-                    email: req.user.email
+                    firstName: u.first_name,
+                    lastName: u.last_name,
+                    email: u.email,
+                    username: u.username,
+                    password: u.password,
+                    uuid: u.uuid
                 });
             }
             else{
@@ -106,9 +111,13 @@ module.exports = function(app, passport) {
 
     app.post("/api/user", (req, res) => {
         console.log(req.body);
+        const u = req.body;
         db.User.create({
-            email: req.body.email,
-            password: req.body.password
+            first_name: u.firstName,
+            last_name: u.lastName,
+            email: u.email,
+            username: u.username,
+            password: u.password,
         })
         .then( results => {
             res.json(results);
