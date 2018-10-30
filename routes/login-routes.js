@@ -67,6 +67,7 @@ module.exports = function(app, passport) {
             if(req.isAuthenticated()){
                 const u = req.user
                 res.json({
+                    id: u.id,
                     firstName: u.first_name,
                     lastName: u.last_name,
                     email: u.email,
